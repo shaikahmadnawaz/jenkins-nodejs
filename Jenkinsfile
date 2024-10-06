@@ -1,11 +1,15 @@
 pipeline {
   agent {
     docker {
-      image 'node:20-alpine'
-      args '-v $HOME/.npm:/root/.npm'
+      image 'node:20'
     }
   }
   stages {
+    stage('Clone Repository') {
+      steps {
+        git 'https://github.com/shaikahmadnawaz/jenkins-nodejs.git'
+      }
+    }
     stage('Install Dependencies') {
       steps {
         sh 'npm install'
